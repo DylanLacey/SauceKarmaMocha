@@ -10,11 +10,18 @@
   "author": "Sauce Labs",
   "license": "Apache V2",
   "devDependencies": {
-    "karma": "^0.12.0",
-    "karma-sauce-launcher": "^0.2.3",
-    "karma-jasmine": "^0.2.2",
+    "browserify": "^14.1.0",
+    "chai": "~2.3.0",
+    "chai-as-promised": "~5.0.0",
+    "karma": "^1.1.1",
+    "karma-browserify": "^5.1.1",
     "karma-chrome-launcher": "^0.1.2",
     "karma-firefox-launcher": "^0.1.3",
-    "karma-safari-launcher": "^0.1.1"
+    "karma-mocha": "^1.3.0",
+    "karma-mocha-reporter": "^2.2.3",
+    "karma-safari-launcher": "^0.1.1",
+    "karma-sauce-launcher": "^1.0.0",
+    "mocha": "^3.2.0",
+    "watchify": "^3.9.0"
   }
 }

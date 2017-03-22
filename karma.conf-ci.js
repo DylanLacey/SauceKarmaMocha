@@ -15,19 +15,21 @@ module.exports = function(config) {
 
   // Browsers to run on Sauce Labs
   var customLaunchers = {
-    'SL_Chrome': {
+    sl_chrome_latest_osx11: {
       base: 'SauceLabs',
-      browserName: 'chrome'
+      platform: 'OS X 10.11',
+      browserName: 'chrome',
+      version: 'latest'
     },
-    'SL_InternetExplorer': {
-      base: 'SauceLabs',
-      browserName: 'internet explorer',
-      version: '10'
-    },
-    'SL_FireFox': {
-      base: 'SauceLabs',
-      browserName: 'firefox',
-    }
+    // 'SL_InternetExplorer': {
+    //   base: 'SauceLabs',
+    //   browserName: 'internet explorer',
+    //   version: '10'
+    // },
+    // 'SL_FireFox': {
+    //   base: 'SauceLabs',
+    //   browserName: 'firefox',
+    // }
   };
 
   config.set({
@@ -38,7 +40,7 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine'],
+    frameworks: ['mocha', 'browserify'],
 
 
     // list of files / patterns to load in the browser
@@ -47,15 +49,24 @@ module.exports = function(config) {
       'test/*.js'
     ],
 
+    preprocessors: {
+      'test/**/*.js': [ 'browserify' ]
+    },
+
+    browserify: {
+      debug: true,
+     // transform: [ 'brfs' ]
+    },
+
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['dots', 'saucelabs'],
+    reporters: ['dots', 'saucelabs', 'mocha'],
 
 
     // web server port
-    port: 9876,
+    port: 9001,
 
     colors: true,
 
@@ -64,11 +75,14 @@ module.exports = function(config) {
     logLevel: config.LOG_INFO,
 
     sauceLabs: {
-      testName: 'Karma and Sauce Labs demo'
+      testName: 'Karma and Sauce Labs demo',
+      recordVideo: true,
+      recordScreenshots: true,
+      startConnect: true
     },
     captureTimeout: 120000,
     customLaunchers: customLaunchers,
-
+    browserNoActivityTimeout: 20000,
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     browsers: Object.keys(customLaunchers),
